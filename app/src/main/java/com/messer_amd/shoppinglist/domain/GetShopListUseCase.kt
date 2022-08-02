@@ -2,9 +2,10 @@ package com.messer_amd.shoppinglist.domain
 
 // класс, который отображает весь список покупок
 
-class GetShopListUseCase {
+class GetShopListUseCase(private val shopListRepository: ShopListRepository) {
 
     fun getShopList(): List<ShopItem> {
-        TODO()
+
+        return shopListRepository.getShopList()
     }
 }
