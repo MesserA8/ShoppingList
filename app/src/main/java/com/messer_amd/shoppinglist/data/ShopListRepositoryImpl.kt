@@ -24,10 +24,12 @@ object ShopListRepositoryImpl: ShopListRepository {
             shopItem.id = autoIncrementId++
         }
         shopList.add(shopItem)
+        updateList()
     }
 
     override fun deleteShopItem(shopItem: ShopItem) {
         shopList.remove(shopItem)
+        updateList()
     }
 
     override fun editShopItem(shopItem: ShopItem) {
@@ -47,6 +49,6 @@ object ShopListRepositoryImpl: ShopListRepository {
     }
 
     private fun updateList() {
-        shopListLD.value = shopList.toList()
+        shopListLD.value = shopList.toList() //return copy of list: " .toList() "
     }
 }
