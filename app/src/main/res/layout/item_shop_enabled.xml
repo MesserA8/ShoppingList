@@ -9,13 +9,13 @@
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="4dp"
     app:cardCornerRadius="4dp"
-    app:cardElevation="1dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#33BB86FC"
+        android:background="@color/purple_200"
         android:orientation="horizontal"
         android:padding="16dp">
 
