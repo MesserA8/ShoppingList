@@ -25,8 +25,17 @@ class ShopItemViewModel : ViewModel() {
     val errorInputCount: LiveData<Boolean>
         get() = _errorInputCount
 
+    private val _shopItem = MutableLiveData<ShopItem>()
+    val shopItem: LiveData<ShopItem>
+        get() = _shopItem
+
+    private val _shouldCloseScreen = MutableLiveData<Unit>()
+    val shouldCloseScreen: LiveData<Unit>
+        get() = _shouldCloseScreen
+
     fun getShopItem(shopItemId: Int) {
         val item = getShopItemUseCase.getShopItem(shopItemId)
+        _shopItem.value = item
     }
 
     fun addShopItem(inputName: String?, inputCount: String?) {
@@ -36,6 +45,7 @@ class ShopItemViewModel : ViewModel() {
         if (fieldsValid) {
             val shopItem = ShopItem(name, count, true)
             addShopItemUseCase.addShopItem(shopItem)
+            finishWork()
         }
     }
 
@@ -46,6 +56,7 @@ class ShopItemViewModel : ViewModel() {
         if (fieldsValid) {
             val shopItem = ShopItem(name, count, true)
             editShopItemUseCase.editShopItem(shopItem)
+            finishWork()
         }
     }
 
@@ -68,7 +79,7 @@ class ShopItemViewModel : ViewModel() {
             result = false
         }
         if (count <= 0) {
-           _errorInputCount.value = true
+            _errorInputCount.value = true
             result = false
         }
         return result
@@ -80,5 +91,9 @@ class ShopItemViewModel : ViewModel() {
 
     fun resetErrorInputCount() {
         _errorInputCount.value = false
+    }
+
+    private fun finishWork() {
+        _shouldCloseScreen.value = Unit
     }
 }
