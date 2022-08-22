@@ -7,10 +7,13 @@ import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.messer_amd.shoppinglist.R
 
 class ShopItemActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: ShopItemViewModel // link to view model
 
     private lateinit var tilName: TextInputLayout
     private lateinit var tilCount: TextInputLayout
@@ -21,6 +24,7 @@ class ShopItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_item)
+        viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
         initViews()
         val mode = intent.getStringExtra(EXTRA_SCREEN_MODE)
     }
